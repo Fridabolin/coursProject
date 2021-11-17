@@ -11,17 +11,42 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a  class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a></li>
                 <li class="nav-item active"><a  class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a></li>
-            </ul>
-<!-- DropDown -->
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a  href="#" class="dropdown-toggle" role="button"  class="nav-link dropdown-toggle">Manage <span class="caret"></span></a>
+
+<!-- Jimis navbar -->
+                <li class="nav-item dropdown">
+
+                  <!-- data-bs-toggle och aria-expanded "false" blir till show är det som gör att drop down funkar -->
+                  <a
+                    class="dropdown-toggle nav-link"
+                    id="navbarDropdown"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="cursor: pointer;"
+                    >
+                    Manage <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuManage">
+                    <li >
+                      <a class="dropdown-item" style="cursor: pointer;" >Save Data</a>
+                    </li>
+                    <li >
+                      <a class="dropdown-item" style="cursor: pointer;" >Fetch Data</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+<!-- DropDown funkar inte pga för ny bootstrap -->
+            <!-- <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown"
+                appDropdown>
+                    <a  href="#" role="button"  class="nav-link dropdown-toggle">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Save Data</a></li>
                         <li><a href="#"> Fetch Data</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </nav>
