@@ -24,3 +24,9 @@ export class RecepiesComponent implements OnInit {
   }
 
 }
+
+
+//9. Providers When you add a service provider to the root application injector,
+//  it’s available throughout the application. Additionally,
+//  these providers are also available to all the classes in
+//  the application as long they have the lookup token.

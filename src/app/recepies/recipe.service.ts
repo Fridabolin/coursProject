@@ -1,40 +1,41 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { ShoppingListService } from "../shopping-list/shopping-list.service";
-import { Recipe } from "./recipe.model"
-import { Ingredient } from "../shared/ingredient.model";
-
+import { EventEmitter, Injectable } from '@angular/core';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable()
-export class RecipeService{
-  recipeSelected = new EventEmitter <Recipe>();
+export class RecipeService {
+  recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-  new Recipe(
-  'Tasty schnitzel',
-  'this is simply a test',
-  'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
-  [
-     new Ingredient('Meat', 1),
-     new Ingredient('French Fries', 20)
-  ],),
+    new Recipe(
+      'Tasty schnitzel',
+      'this is simply a test',
+      'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
+      [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]
+    ),
 
-  new Recipe(
-    'Big fat burger',
-    'this is simply a test',
-    'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
-    [
-      new Ingredient('Buns', 2),
-     new Ingredient('Meat', 1)
-    ],)
-];
+    new Recipe(
+      'Big fat burger',
+      'this is simply a test',
+      'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
+      [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
+    ),
+  ];
 
-constructor(private slService:ShoppingListService){}
+  constructor(private slService: ShoppingListService) {}
 
-getRecipes(){
-  return this.recipes.slice();
+  getRecipes() {
+    return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    console.log("hej från recipe.service");
+    this.slService.addIngredients(ingredients);
+    console.log("hej från recipe.service 35");
+  }
 }
 
-addIngredientsToShoppingList(ingredients: Ingredient[]){
-this.slService.addIngredients(ingredients);
-}
-}
+// 11. private så att det inte går att nå den från utsidan
+//34. getRecipes() gör så vi får tillgång till recepten från utsidan
+// 35. slice retunerar en ny array som är en exakt kopia
