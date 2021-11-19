@@ -1,7 +1,9 @@
-
+<!-- viktigt att ta bort #href i <a> så inte sidan laddas om. lägg in en cursor:pointer
+  så vi fortfarande ser att den är klickbar-->
               <a
-                href="#" class="list-group-item clearfix"
-                (click)="onSelected()">
+              style="cursor: pointer;"
+              [routerLink]="[index]"
+                class="list-group-item clearfix">
                    <div class="pull-left">
                        <h4 class="list-group-item-heading">{{recipe.name}}</h4>
                        <p class="list-group-item-text">{{recipe.description}}</p>
@@ -13,4 +15,5 @@
                          style="max-height: 100px;">
                    </span>
                </a>
+
 

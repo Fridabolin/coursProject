@@ -1,17 +1,23 @@
+
+<div class="wrapper">
 <div class="row">
   <div class="col-xs-12">
+    <br>
     <button class="btn btn-success">New Recipe</button>
   </div>
 </div>
 <!-- Här hämtar vi informationen från recipe-list.component.ts och gör ett receptkort-->
-
+<br>
 <div class="row">
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12"></div>
     </div>
+     <!-- vi får fram recipe och index genom forloop -->
     <app-recipe-item
-      *ngFor="let recipeEL of recipes"
-      [recipe]="recipeEL"></app-recipe-item>
+      *ngFor="let recipeEL of recipes; let i = index"
+      [recipe]="recipeEL"
+      [index]="i"></app-recipe-item>
   </div>
+</div>
 </div>

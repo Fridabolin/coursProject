@@ -23,19 +23,24 @@ export class RecipeService {
     ),
   ];
 
+  // 11. private så att det inte går att nå den från utsidan
   constructor(private slService: ShoppingListService) {}
 
+  //gör så vi får tillgång till recepten från utsidan. slice retunerar en exakt kopia.
   getRecipes() {
     return this.recipes.slice();
   }
 
+  // en funktion som gör det möjligt för oss att ladda recept via id
+  getRecipe(index:number){
+    return this.recipes[index]
+  }
+
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    console.log("hej från recipe.service");
+
     this.slService.addIngredients(ingredients);
-    console.log("hej från recipe.service 35");
   }
 }
 
-// 11. private så att det inte går att nå den från utsidan
-//34. getRecipes() gör så vi får tillgång till recepten från utsidan
-// 35. slice retunerar en ny array som är en exakt kopia
+
+

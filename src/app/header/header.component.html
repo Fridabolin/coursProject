@@ -6,16 +6,21 @@
         <div class="navbar-header">
             <a href="#" class="navbar-brand">Recipe Book</a>
         </div>
-<!-- Länkarna -->
+<!-- Länkarna. Först använde vi oss av ngIf för att navigera, nu routerLink-->
+<!-- routerLinkActive funkar inte pga nyare bootstrap har provat, provade ett annat sätt men får inte markerade rutor men markerad text-->
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a  class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a></li>
-                <li class="nav-item active"><a  class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a></li>
+                <li  [class.active]="homeLink.classList.contains('active')" >
+                  <a #homeLink routerLink="/recipes" class="nav-link" routerLinkActive="active" >Recipes</a></li>
+                <li  [class.active]="homeLink.classList.contains('active')">
+                  <a routerLink="/shopping-list" class="nav-link" routerLinkActive="active" >Shopping List</a></li>
 
 <!-- Jimis navbar -->
+<!-- inga # så sidan laddas om -->
+<!-- data-bs-toggle och aria-expanded "false" blir till show är det som gör att drop down funkar -->
+
                 <li class="nav-item dropdown">
 
-                  <!-- data-bs-toggle och aria-expanded "false" blir till show är det som gör att drop down funkar -->
                   <a
                     class="dropdown-toggle nav-link"
                     id="navbarDropdown"
