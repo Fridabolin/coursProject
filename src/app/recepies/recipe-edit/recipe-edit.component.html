@@ -1,1 +1,108 @@
-<p>recipe-edit works!</p>
+<div class="wrapper">
+<div class="row">
+  <div class="col-xs-12">
+    <!-- formGroup användes här med [] för vi behöver skicka data i form av recipeform -->
+    <!-- ngSubmit istället för eventlistener  -->
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="col-xs-12">
+        <button
+         type="submit"
+          class="btn btn-success"
+          [disabled]="!recipeForm.valid">Save</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text"
+            name="name"
+            id="name"
+            formControlName="name"
+            class="form-control" />
+          </div>
+        </div>
+      </div>
+<!-- skapar en lokal referens #imagePath -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">image Url</label>
+            <input
+            type="text"
+            id="imagePath"
+            formControlName="imagePath"
+            class="form-control"
+            #imagePath />
+          </div>
+        </div>
+      </div>
+<!-- hämtar värdet från #imagePath -->
+      <div class="row">
+        <div class="col-xs-12">
+          <br>
+          <img [src]="imagePath.value" class="img-responsive" style="max-width: 20rem;" />
+          <br>
+          <br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <br>
+            <textarea
+            type="text"
+            id="description"
+            formControlName="description"
+            rows="6">
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div
+          class="row-inputs"
+          *ngFor="let ingredientCtrl of controls; let i = index"
+           [formGroupName]="i"
+           style="margin-top: 10px;">
+
+            <div class="big">
+              <input
+              type="text"
+              class="form-control"
+              formControlName="name"/>
+            </div>
+
+            <div class="small">
+              <input
+              type="number"
+              class="form-control"
+              formControlName="amount"/>
+            </div>
+<!-- i för att det är den som är ingredienserna som läggs till -->
+            <div class="redX">
+            <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDeleteIngredient(i)">X</button>
+            </div>
+          </div>
+          <div class="row">
+            <hr>
+            <div class="col-xs-12">
+              <button class="btn btn-success"
+              type="button"
+              (click)="onAddIngredient()">add ingredient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+</div>

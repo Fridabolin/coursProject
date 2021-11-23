@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form (ngSubmit)="onAddItem(f)" #f="ngForm">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="name">Name</label>
@@ -12,7 +12,6 @@
                     required
                      >
                 </div>
-                <!-- han använde pattern='^[1-9] + [0-9]*$' , funkade inte på min, använder istället min="0" -->
                 <div class="col-sm-2 form-group">
                     <label for="amount">Amount</label>
                     <input type="number"
@@ -21,7 +20,7 @@
                     name="amount"
                     ngModel
                     required
-                    min="0"
+                    pattern="^[1-9]+[0-9]*$"
                     >
                 </div>
             </div>
@@ -31,8 +30,11 @@
                     <button class="btn btn-success"
                      type="submit"
                     [disabled]="!f.valid">{{editMode ? 'Update' : 'Add'}}</button>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
+                    <button class="btn btn-danger"
+                    type="button"
+                    (click)="onDelete()"
+                    *ngIf="editMode">Delete</button>
+                    <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
                 </div>
             </div>
         </form>

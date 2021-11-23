@@ -1,0 +1,36 @@
+.wrapper
+{
+  margin-top: 1.5rem;
+  width: 90%;
+}
+
+
+.row-inputs
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.big{
+  width: 40%;
+}
+
+.small{
+  width: 10%;
+}
+
+.big , .small , .redX{
+  margin-right :1em;
+}
+
+
+textarea
+{
+  width:100%;
+}
+
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+border:1px solid red;
+}
