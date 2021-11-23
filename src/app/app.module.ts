@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeStartComponent } from './recepies/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recepies/recipe-edit/recipe-edit.component';
 
 
 
@@ -28,7 +29,8 @@ import { RecipeStartComponent } from './recepies/recipe-start/recipe-start.compo
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    RecipeStartComponent
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

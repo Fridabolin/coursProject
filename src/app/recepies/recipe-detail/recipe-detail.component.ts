@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -24,7 +24,8 @@ export class RecipeDetailComponent implements OnInit {
 
 
   constructor(private recipeService: RecipeService,
-             private route: ActivatedRoute) { }
+             private route: ActivatedRoute,
+          private router:Router) { }
 
   //34.här sätter vi subscribe och params för att reagera och hämta förändringar,
   //35. vi använder oss av id för att kunna identifiera receptet
@@ -39,8 +40,13 @@ export class RecipeDetailComponent implements OnInit {
   )
   }
 
+  //Lägger till ingredienser till shoppinglistan
   onAddToShoppingList() {
    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
+  //Kopplar edit-recipe länken i Manage recipe dropdown till recipe-edit template.
+  onEditRecipe(){
+    this.router.navigate(['edit'] , {relativeTo: this.route})
+  }
 }
