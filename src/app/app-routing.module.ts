@@ -5,6 +5,7 @@ import { RecepiesComponent } from './recepies/recepies.component';
 import { RecipeDetailComponent } from './recepies/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recepies/recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recepies/recipe-start/recipe-start.component';
+import { RecipeResolverService } from './recepies/recipes-resolver-service';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 
@@ -18,8 +19,12 @@ const appRoutes: Routes = [
   { path: 'recipes', component: RecepiesComponent, children:[
     {path: '', component:RecipeStartComponent },
     {path: 'new' , component: RecipeEditComponent}, //måste vara före id, new måset komma före den dynamiska parametern annars vet inte angular om det ska vara "new" eller id
-    {path: ':id', component: RecipeDetailComponent},
-     {path: ':id/edit', component: RecipeEditComponent}
+    {path: ':id',
+    component: RecipeDetailComponent,
+    resolve:[RecipeResolverService]},
+     {path: ':id/edit',
+      component: RecipeEditComponent,
+      resolve:[RecipeResolverService] }
   ]},
   { path: 'shopping-list' , component:ShoppingListComponent}
 ];
