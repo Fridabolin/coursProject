@@ -15,14 +15,16 @@ import { ShoppingListService } from '../shopping-list.service';
   styleUrls: ['./shopping-edit.component.scss']
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  @ViewChild('f') slForm! : NgForm
-  subscription!: Subscription
-  editMode = false;
+  @ViewChild('f') slForm! : NgForm //för att komma åt vår lokala referens i shopping-edit.html
+  subscription!: Subscription //lagrar vår subscripiton om det skulle förstöras.
+  editMode = false; //så att appen ska veta när vi är i editMode
   editedItemIndex!: number;
-  editedItem!: Ingredient;
+  editedItem!: Ingredient; // vi lagrar resultatet av vår nya metod i Ingredient
 
   constructor(private slService: ShoppingListService) { }
 
+  //lagrar vår subscription från startedEditing. den här metoden gör så att vi kan
+  //välja en ingrediens och den kommer till name och amount så vi kan redigera den
   ngOnInit(){
    this.subscription = this.slService.startedEditing
     .subscribe(
@@ -34,11 +36,14 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
           name:this.editedItem.name,
           amount:this.editedItem.amount
         })
-
       }
     );
   }
 
+  // vi hämtar acces till formuläret
+  // om vi är i editmode så vill vi inte lägga till en ny ingrediens utan istället redigera vår ingrediens
+  //med updateIngredient
+  //annars kallar vi på addIngredient
   onSubmit
   (form:NgForm){
     const value = form.value;
@@ -52,16 +57,21 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     form.reset();
   }
 
+  //genom @viewchild har vi acces till formuläret, så med reset() tömmer vi inputfälten
+  //editmode sätts till false så add kommer upp igen
   onClear(){
     this.slForm.reset();
     this.editMode=false;
   }
 
+  //kopplat till deleteIngredient i shopping-list.service.ts. vi kallar på deleteIngredient och skickar med vår editedItemIndex och sedan
+  //onClear för att rensa inputfälten och återställa add knappen 
   onDelete(){
     this.slService.deleteIngredient(this.editedItemIndex);
     this.onClear()
   }
 
+  //för att rensa upp vår subescription längre upp
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }

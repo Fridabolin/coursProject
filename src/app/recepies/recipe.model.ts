@@ -1,7 +1,5 @@
 
 
-// vi har skapat en model där vi ska skriva en blueprint/class för
-// hur vår lista för recipes ska se ut
 
 import { Ingredient } from "../shared/ingredient.model";
 

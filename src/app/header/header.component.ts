@@ -18,3 +18,14 @@ export class HeaderComponent {
     this.dataStorageService.fetchRecipes().subscribe();
   }
 }
+
+
+//onSaveData() kallar vi på vår metod för att spara recept
+// som vi gjort i data-storage-service
+//för att komma åt den måste vi @injecta den, så med det kan vi skriva
+// this.dataStorgaeService.StoreRecipe och lagra våra recept
+
+
+//onFetchData() kallar på fetchRecipes() i data-storage-service.ts
+
+//on fetch måset vi subscribe'a för att lyssna efter uppdateringar 

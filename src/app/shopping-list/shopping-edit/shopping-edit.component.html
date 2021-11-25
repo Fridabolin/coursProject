@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
+      <!-- vår lokala referens #f gör att vi kommer åt formuläret (ihop med viewChild) -->
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="row">
                 <div class="col-sm-5 form-group">
@@ -24,6 +25,7 @@
                     >
                 </div>
             </div>
+            <!-- om editmode är true vill jag att knappen ska hete update annars add -->
             <div class="row">
                 <div class="col-xs-12">
                     <br>

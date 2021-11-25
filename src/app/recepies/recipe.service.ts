@@ -6,27 +6,11 @@ import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable()
 export class RecipeService {
-  recipesChanged = new Subject<Recipe[]>();
+  recipesChanged = new Subject<Recipe[]>(); //Behövs för att onAdd ska funka. den skickar en  tom array
 
-  // private recipes: Recipe[] = [
-  //   new Recipe(
-  //     'Tasty schnitzel',
-  //     'yummy yummy in my tummy',
-  //     'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
-  //     [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]
-  //   ),
+  private recipes:Recipe[] = []; //en tom array med recept så sidan är tom när vi kommer in på den
 
-  //   new Recipe(
-  //     'Big fat burger',
-  //     'Juicy ',
-  //     'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',
-  //     [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
-  //   ),
-  // ];
 
-  private recipes:Recipe[] = [];
-
-  // 11. private så att det inte går att nå den från utsidan
   constructor(private slService: ShoppingListService) {}
 
   //gör så vi får tillgång till recepten från utsidan. slice retunerar en exakt kopia.
@@ -34,12 +18,14 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
+
+ // metod som skriver över recept från private recipes:Recipe[] (längre upp). när vi trycker på FetchData
  setRecipes(recipes: Recipe[]){
   this.recipes = recipes;
   this.recipesChanged.next(this.recipes.slice())
  }
 
-  // en funktion som gör det möjligt för oss att ladda recept via id
+  // gör det möjligt för oss att ladda recept via id
   getRecipe(index: number) {
     return this.recipes[index];
   }
@@ -48,17 +34,24 @@ export class RecipeService {
     this.slService.addIngredients(ingredients);
   }
 
+  // vi tar receptarrayen och .push ett nytt recept på den, sen skickar vi
+  //en kopia med .slice()
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
   }
 
+  //tar receparrayen tar index elementet som ett argument och sätter det till
+  //ett nytt recept. och skickar en kopia med .slice
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  // delete button //
+  // delete button to onDeliteRecipe
+  //gör en kopia minus det recept vi tagit bort
+  //skickar kopian till recipesChanged
+
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());

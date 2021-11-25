@@ -22,7 +22,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-   this.subscription = this.recipeService.recipesChanged
+   this.subscription = this.recipeService.recipesChanged // för att lyssna på när receptet ändras. om receptet ändras får jag det i en ny array med recept och sedan uppdaterar vi receptet
     .subscribe (
       (recipes: Recipe[] ) => {
          this.recipes = recipes;
@@ -31,7 +31,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  //aktiverar "new Recipe" knappen, kopplar den med recipe edit.
   onNewRecipe() {
     this.router.navigate(['new'], {relativeTo: this.route})
   }

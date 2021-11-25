@@ -50,8 +50,9 @@ export class RecipeDetailComponent implements OnInit {
     this.router.navigate(['edit'] , {relativeTo: this.route})
   }
 
+
   onDeleteRecipe(){
     this.recipeService.deleteRecipe(this.id)
-    this.router.navigate(['/recipes']);
+    this.router.navigate(['/recipes']);  //för att inte information från receptkortet vi kört delete på ska synas
   }
 }

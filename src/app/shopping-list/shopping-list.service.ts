@@ -7,7 +7,7 @@ import { Ingredient } from "../shared/ingredient.model";
 export class ShoppingListService{
 
   ingredientsChanged = new Subject<Ingredient[]>();
-  startedEditing = new Subject <number>();
+  startedEditing = new Subject <number>(); // för att kunna lyssna på i shopping.edit.component
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -35,11 +35,16 @@ export class ShoppingListService{
     this.ingredientsChanged.next(this.ingredients.slice())
   }
 
+  //vi hämtar index av den ingrediens som ska bli uppdaterad och sätter det till en ny
+  //ingrediens sen kallar vi på ingredientsChange och skickar in vår uppdaterade ingrediens
   updateIngredient(index: number, newIngredient: Ingredient){
     this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
+  //med index får jag rätt  ingrediens att radera, splice retunerar en kopia efter att
+  //ett index är borttaget.
+  //sen kallar vi på ingredietsChangede och skickar vår nya kopia. 
   deleteIngredient(index: number){
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice())

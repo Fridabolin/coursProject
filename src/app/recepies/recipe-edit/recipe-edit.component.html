@@ -2,7 +2,6 @@
 <div class="row">
   <div class="col-xs-12">
     <!-- formGroup användes här med [] för vi behöver skicka data i form av recipeform -->
-    <!-- ngSubmit istället för eventlistener  -->
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
       <div class="col-xs-12">
         <button
@@ -68,7 +67,8 @@
           class="row-inputs"
           *ngFor="let ingredientCtrl of controls; let i = index"
            [formGroupName]="i"
-           style="margin-top: 10px;">
+           style="margin-top: 10px;"
+           style="margin-bottom: 10px;">
 
             <div class="big">
               <input

@@ -11,7 +11,7 @@ import { RecipeService } from '../recipe.service';
 export class RecipeEditComponent implements OnInit {
   id!: number;
   editMode = false;
-  recipeForm!: FormGroup;
+  recipeForm!: FormGroup; // FormGroup måste importas och måste läggas in i app.module
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +31,11 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  //Spara informationen i vår receptarray eller uppdatera existerande
+  //vi kollar om vi är i editmode, är vi det kallar vi på updateRecipe() vi skickar in id på det receptet vi
+  //jobbar på och sedan det nya receptet
+  //else - om vi inte är i edit mode kallar vi på recepieService och addRecipe metoden och skickar in vårt nya recept
+  //för att detta ska funka behövs recipesChanged = new Subject<Recipe[]>(); i recipe.service.ts
   onSubmit() {
 
     if (this.editMode){
@@ -41,6 +46,9 @@ export class RecipeEditComponent implements OnInit {
     this.onCancel();
   }
 
+  //skaffar acces till recipeForm och ingredienserna, för att angular ska veta
+  //att det är en array måste vi "casta den" <FormArraray> och (), allt mellan paranteserna är av array
+  //vi vill pusha en ny formgroup - alltså våra inputfält och knapp i satt formgroup på.
   onAddIngredient(){
     (<FormArray> this.recipeForm.get('ingredients')).push(
       new FormGroup({
@@ -54,22 +62,22 @@ export class RecipeEditComponent implements OnInit {
   }
 
 
-  // The clear() method automatically loops through all registered FormControls
-  // (or FormGroups) in the FormArray and removes them.
-  // It's like manually creating a loop and calling removeAt() for every item.
-  
+  // The clear() method automatically loops through all registered FormControls (or FormGroups) in the FormArray and removes them.
+
+//hämtar index som blir den groupcontrol vi vill ta bort
+// hämtar acces till ingrediens arrayen med get
   onDeleteIngredient(index:number){
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
+// behöver importa Router. vi behöver säga till angular vår nuvarande route (det gör vi i constructorn)
 
-
-
-// eftersom jag lagt in  private router:Router i constructorn kan jag navigera vidare
   onCancel(){
     this.router.navigate(['../'], {relativeTo:this.route})
   }
 
+
+  //formvalidering
   private initForm() {
     let recipeName = '';
     let recipeImagePath = '';
@@ -80,7 +88,8 @@ export class RecipeEditComponent implements OnInit {
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
-      recipeDescription = recipe.description;
+      recipeDescription = recipe.description
+
       if (recipe['ingredients']) {
         for (let ingredient of recipe.ingredients) {
           recipeIngredients.push(
@@ -110,3 +119,24 @@ export class RecipeEditComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+//private initForm
+
+//import FormGroup
+//vi når receptet genom att injecta RecipeService samt importerar
+
+//vi gör variablar som vi sedan kopplar till en if sats
+
+// let recipeName = '';
+// let recipeImagePath = '';
+// let recipeDescription = '';
+// let recipeIngredients = new FormArray([]);
+
+//sen gör vi logik som säger hur det ska se ut i editmode
+
+//vi har hämtat id längre upp så med det och recipeService kommer vi åt receptet och kan säga
+// att
