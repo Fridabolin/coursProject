@@ -28,15 +28,11 @@ export class ShoppingListService{
   }
 
   addIngredients(ingredients:Ingredient[]){
-  //  for (let ingredient of ingredients){
-  //    this.addIngredient(ingredient);
-  //  }
     this.ingredients.push(...ingredients);
     this.ingredientsChanged.next(this.ingredients.slice())
   }
 
-  //vi hämtar index av den ingrediens som ska bli uppdaterad och sätter det till en ny
-  //ingrediens sen kallar vi på ingredientsChange och skickar in vår uppdaterade ingrediens
+
   updateIngredient(index: number, newIngredient: Ingredient){
     this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
@@ -44,7 +40,7 @@ export class ShoppingListService{
 
   //med index får jag rätt  ingrediens att radera, splice retunerar en kopia efter att
   //ett index är borttaget.
-  //sen kallar vi på ingredietsChangede och skickar vår nya kopia. 
+  //sen kallar vi på ingredietsChangede och skickar vår nya kopia.
   deleteIngredient(index: number){
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice())

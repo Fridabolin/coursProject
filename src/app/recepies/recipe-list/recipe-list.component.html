@@ -6,14 +6,13 @@
     <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
   </div>
 </div>
-<!-- Här hämtar vi informationen från recipe-list.component.ts och gör ett receptkort-->
 <br>
 <div class="row">
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12"></div>
     </div>
-     <!-- vi får fram recipe och index genom forloop -->
+    <!-- binder det vi får fram från *ngFor till let i = index. sedab skickar vi med [index]="i"  -->
     <app-recipe-item
       *ngFor="let recipeEL of recipes; let i = index"
       [recipe]="recipeEL"

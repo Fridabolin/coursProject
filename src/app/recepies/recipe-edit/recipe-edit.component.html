@@ -1,7 +1,7 @@
 <div class="wrapper">
 <div class="row">
   <div class="col-xs-12">
-    <!-- formGroup användes här med [] för vi behöver skicka data i form av recipeform -->
+    <!-- Save, Cancel och input för receptnamn -->
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
       <div class="col-xs-12">
         <button
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-<!-- skapar en lokal referens #imagePath -->
+<!-- skapar en lokal referens #imagePath från url-inputen-->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-<!-- hämtar värdet från #imagePath -->
+<!-- hämtar värdet=bilden från #imagePath -->
       <div class="row">
         <div class="col-xs-12">
           <br>
@@ -45,7 +45,7 @@
           <br>
         </div>
       </div>
-
+<!-- textarea för beskrivning -->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-
+<!-- inputfälten till name och amount -->
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
           <div
@@ -83,7 +83,7 @@
               class="form-control"
               formControlName="amount"/>
             </div>
-<!-- i för att det är den som är ingredienserna som läggs till -->
+<!-- knappar till ingredienser för receptet -->
             <div class="redX">
             <button
             type="button"

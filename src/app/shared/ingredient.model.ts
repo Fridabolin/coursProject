@@ -9,5 +9,4 @@ export class Ingredient {
     }
 }
 
-// vi hade även kunnat skriva constructor(public name: string, public amount: number){}
-// i export class ingredient {}
+

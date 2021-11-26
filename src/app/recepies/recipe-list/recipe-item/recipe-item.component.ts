@@ -7,11 +7,9 @@ import { Recipe } from '../../recipe.model';
   styleUrls: ['./recipe-item.component.scss']
 })
 export class RecipeItemComponent implements OnInit {
- @Input() recipe!: Recipe; //gör så vi når recipe från utsidan 
- @Input() index!: number; //kommer göra att vi kan nå index/Recipe från utsidan
+ @Input() recipe!: Recipe;
+ @Input() index!: number; //får vårt index från recipe-list.html
 
   ngOnInit() {
   }
-
-
 }
